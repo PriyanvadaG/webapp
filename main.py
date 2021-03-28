@@ -105,8 +105,14 @@ def index():
     #return render_template('test.html', messages=MESSAGES, tokens=TOKENS, claims=CLAIMS,blobs=BLOBS, test_message="test msg"), 200
     return redirect(url_for('receive_messages_handler'))
     #return redirect(url_for('download'))
+
+@app.route('/test')
+def test():
+    return render_template('test.html', messages=MESSAGES, tokens=TOKENS, claims=CLAIMS,blobs=BLOBS, test_message="test msg")
+
 # [END index]
   
+
 
 # [START push]
 @app.route('/push-handlers/receive_messages', methods=['POST', 'GET'])
@@ -181,5 +187,7 @@ def server_error(e):
 if __name__ == '__main__':
     # This is used when running locally. Gunicorn is used to run the
     # application on Google App Engine. See entrypoint in app.yaml.
+    for k, v in app.config.items():
+        print(f"{k} ={v}")
     app.run(host='127.0.0.1', port=8080, debug=True)
 # [END app]
