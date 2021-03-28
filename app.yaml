@@ -1,0 +1,18 @@
+runtime: python39
+
+#[START env]
+env_variables:
+  PUBSUB_TOPIC: 'test'
+  PUB_TOPIC : 'commands'
+  # This token is used to verify that requests originate from your
+  # application. It can be any sufficiently random string.
+  PUBSUB_VERIFICATION_TOKEN: '1234abc'
+  CLOUD_STORAGE_BUCKET : 'sensorpi-data'
+#[END env]
+
+handlers:
+- url: /blobstore.*
+  script: auto
+
+- url: /.*
+  script: auto
